@@ -1,0 +1,44 @@
+<% include header %>
+<div>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="thumbnail" style="margin-top: 1.5em">
+                <% if(product.image.charAt(0) == 'h') { %>
+                <img style="max-height: 500px; max-width: 500px;" class="img-responsive" src="<%=product.image%>">
+                <% } else { %>
+                <img style="max-height: 500px; max-width: 500px;" class="img-responsive" src="http://localhost:3000/<%=product.image%>">
+                <% } %>
+                <div class="caption-full">
+                    <h6>NAME: <%=product.name%></h6>
+                    <p>DESCRIPTION: <%= product.description %></p>
+
+                    <p>
+                        <b> posted by <%= product.name %> </b>
+                    </p>
+
+                </div>
+            </div>
+            <div class="well">
+                <div class="text-right">
+                    <a class="btn btn-success" href="/products/<%= product.id %>/addComments">Add New Comment</a>
+                </div>
+                <div class="text-left">
+                    <b>Reviews :- </b>
+                </div>
+                <hr>
+                <% count = 1 %>
+                <% comments.forEach(function(comment){  %>
+                <div class="row">
+                    <div class="col-md-12">
+                       <b><%= count++%>.</b> <%= comment.comment %>
+                    </div>
+                </div>
+                <hr>
+                <% }) %>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include footer %>

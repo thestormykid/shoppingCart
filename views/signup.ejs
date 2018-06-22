@@ -1,0 +1,85 @@
+<% include header.ejs %>
+
+
+<div class="container" id="login">
+    <div class="row"  style="margin-top: 46px">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <div class="card" style="width:26em; box-shadow:-1px 7px 20px 2px">
+                <div class="card-content">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <i class="material-icons prefix" style="color: green">mode_edit</i>
+                        </div>
+                        <div class="col-sm-1">
+                            <div></div>
+                        </div>
+                        <div class="col-sm-4">
+                            <span> <b>Sign up</b> </span>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <div class="card-content">
+                    <form action="/Signup" method="POST" class="form-group">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input id="name" type="text" class="validate" name="name">
+                                <label for="name">NAME</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input id="address" type="text" class="validate" name="address">
+                                <label for="address">ADDRESS</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input id="email" type="text" class="validate" name="email">
+                                <label for="email">E.MAIL</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input min="10" max="10" id="phone_number" type="text" class="validate" name="phone">
+                                <label for="phone_number">PHONE</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input id="password" type="password" class="validate" name="password">
+                                <label for="password">PASSWORD</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-7">
+
+                            </div>
+                            <div class="input-field col-md-5">
+                                <div class="pull-right">
+                                    <button class="btn waves-effect waves-light" id="nameButton">Submit
+                                        <i class="material-icons right">send</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include footer.ejs %>

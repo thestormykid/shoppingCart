@@ -1,0 +1,21 @@
+.add {
+    background: red !important;
+    border-radius: 10% !important;
+}
+
+.info {
+    background: blue !important;
+    border-radius: 10% !important;
+}
+
+nav {
+    background: #041E54 !important;
+}
+
+a {
+    color: white !important;
+}
+
+button {
+    border-radius: 10% !important;
+}

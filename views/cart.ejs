@@ -1,0 +1,155 @@
+<% include header.ejs %>
+        <div class="row" style="margin-top: 1em">
+            <div class="col-md-7 col-sm-12">
+                <div class="row" style="margin: 0px">
+                    <div class="col s12 m6">
+                        <div class="card">
+                            <% products.forEach(function(singleProduct) { %>
+                            <% if (singleProduct.count !=0) { %>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="card-image">
+                                        <img style="max-height: 200px" src="<%= singleProduct.image %>">
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-content">
+                                        <div class="row">
+                                            <div class="col s12">
+                                               <strong><%= singleProduct.name %></strong>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col s12">
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <button style="margin-top: 15%; background: red" class="increase waves-effect waves-light btn-small" id="inc<%= singleProduct.id %>">increase</button>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <input style="text-align: center" id="<%=singleProduct.id%>" type="number" value="<%= singleProduct.count %>">
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <% if (singleProduct.count > 0) { %>
+                                                        <button style="margin-top: 15%; background: dodgerblue" class="decrease waves-effect waves-light btn-small" id="dec<%=singleProduct.id%>">decrease</button>
+                                                        <% } %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="card-content">
+                            </div>
+                            <% } %>
+                            <% }) %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-12">
+                <div class="row" style="margin: 0px">
+                    <div class="col s12 m6">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col s4">
+                                        <b>PRICE DETAILS</b>
+                                    </div>
+                                    <div></div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col s12">
+                                        <div class="row">
+                                            <div class="col s5 left">
+                                                <b>Amount Payable (<%= products.length %>)</b>
+                                            </div>
+                                            <div class="col s7 right">
+                                                <b id="totalAmount">
+
+                                                </b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div></div>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<script>
+    var incButton = document.getElementsByClassName('increase');
+    var decButton = document.getElementsByClassName('decrease');
+    function updatePrice () {
+        var data = $.ajax({
+            url: '/getPrice',
+            type: 'GET'
+        })
+        data.done(function (data) {
+            document.getElementById('totalAmount').innerText = data;
+        })
+    }
+    updatePrice();
+
+    $(document).click(function(event) {
+        var element = $(event.target);
+        var text = element.text();
+
+        if (text == "increase") {
+            var id = +(element.context.id.substring(3));
+            var count = document.getElementById(id).value;
+
+            var data = $.ajax({
+                url: '/updateCart',
+                type: 'POST',
+                data: {
+                    text: text,
+                    id: id,
+                    count: count
+                }
+            })
+            data.done(function (updated) {
+                location.reload();
+            })
+
+        } else if (text == 'decrease') {
+            var id = +(element.context.id.substring(3));
+            var count = document.getElementById(id).value;
+
+            var data = $.ajax({
+                url: '/updateCart',
+                type: 'POST',
+                data: {
+                    text: text,
+                    id: id,
+                    count: count
+                }
+            })
+            data.done(function (updated) {
+                location.reload();
+            })
+        }
+    });
+
+//    function myfunction(event) {
+////        console.log(event.target);
+//        console.log(this.element);
+//    }
+
+
+    incButton.onclick = function() {
+//        console.log(this.id);
+    }
+
+    decButton.onclick = function () {
+        console.log(this.id);
+    }
+
+</script>
+<% include footer.ejs %>
